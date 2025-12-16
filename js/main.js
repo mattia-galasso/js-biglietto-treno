@@ -23,48 +23,57 @@ Per controllare che la vostra logica sui prezzi funzioni correttamente, provate 
 
 // - Chiedo all'utente il numero di chilometri che vuole percorrere (via prompt)
 // - Trasformo gli input dell'utente in valori numerici
-/* const userKM = parseInt(
-  prompt("Quanti KM vuoi percorrere? [Inserire un valore numerico]", "50")
-); */
-
-const userKM = 100;
+const userKM = parseInt(
+  prompt("Quanti KM vuoi percorrere? [Inserire un valore numerico]", "100")
+);
 console.log("userKM: ", userKM);
 
 // - Chiedo all'utente la sua età (via prompt)
 // - Trasformo gli input dell'utente in valori numerici
-/* const userAge = parseInt(
+const userAge = parseInt(
   prompt("Quanti anni hai? [Inserire un valore numerico]", "10")
-); */
-const userAge = 10;
+);
 console.log("userAge: ", userAge);
-
-// * TO DO LATER
-
-// - Valido gli input dell'utente
 
 // ? Elaborazione
 
 // - Calcolo il prezzo del biglietto basandomi sul prezzo al km e i km inseriti dall'utente
 const baseKMPrice = 0.21;
-const ticketPrice = baseKMPrice * userKM;
+const ticketFullPrice = userKM * baseKMPrice;
 
-console.log("ticketPrice: ", ticketPrice);
-
-// - Calcolo lo sconto del 20% se l'utente è minorenne
-const twentyDiscount = 20;
-
-// - Calcolo lo sconto del 40% se l'utente è Over 65
-const fortyDiscount = 40;
+console.log("ticketPrice: ", ticketFullPrice);
 
 // ? Output
 
+let finalPrice;
+let alertMessage;
+
 // - SE (L'utente è minorenne)
-//
-//   - L'utente ha uno sconto del 20%
-//
+if (userAge < 18) {
+  // L'utente ha uno sconto del 20%
+  const twentyDiscount = (ticketFullPrice * 20) / 100;
+  finalPrice = ticketFullPrice - twentyDiscount;
+  alertMessage = `Il prezzo del biglietto è di € ${finalPrice.toFixed(
+    2
+  )} (Sconto applicato 20% Under 18)`;
+}
 // - OPPURE (L'utente è Over 65)
-//
-//   - L'utente ha uno scontro del 40%
-//
+else if (userAge > 65) {
+  //   - L'utente ha uno scontro del 40%
+  const fourtyDiscount = (ticketFullPrice * 40) / 100;
+  finalPrice = ticketFullPrice - fourtyDiscount;
+  alertMessage = `Il prezzo del biglietto è di € ${finalPrice.toFixed(
+    2
+  )} (Sconto applicato 40% Over 65)`;
+}
 // - ALTRIMENTI
-//   - L'utente non avrà sconto e pagherà il prezzo pieno del biglietto
+else {
+  //   - L'utente non avrà sconto e pagherà il prezzo pieno del biglietto
+  finalPrice = ticketFullPrice;
+  alertMessage = `Il prezzo del biglietto è di € ${finalPrice.toFixed(
+    2
+  )} (Non sono stati applicati sconti)`;
+}
+
+console.log("finalPrice: ", finalPrice.toFixed(2));
+alert(alertMessage);
