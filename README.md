@@ -20,9 +20,16 @@ Nome repo: `js-biglietto-treno`
 > - 100km, 10 anni => prezzo corretto: €16.80
 > - 100km, 70 anni => prezzo corretto: €12.60
 
+### Bonus
+
+> - Chiediamo il nome, oltre agli altri dati. Se è artur, viaggia GRATIS sempre
+> - Se è tiziano, viaggia a 0.5 euro al km invece di 0.21
+
 ---
 
 ## Pseudo codice
+
+- Chiedo il nome all'utente
 
 - Chiedo all'utente il numero di chilometri che vuole percorrere (via prompt)
 
@@ -43,6 +50,19 @@ Nome repo: `js-biglietto-treno`
 - Calcolo lo sconto del 40% se l'utente è Over 65
 
 ### Output
+
+- SE (L'utente si chiama Artur)
+
+  - L'utente viaggia GRATIS
+
+- OPPURE (L'utente si chiama Tiziano)
+
+  - L'utente viaggia pagando 0,5 al km
+
+- ALTRIMENTI
+  - Segue le regole di default
+
+---
 
 - SE (L'utente è minorenne)
 

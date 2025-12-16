@@ -17,9 +17,19 @@ Per controllare che la vostra logica sui prezzi funzioni correttamente, provate 
 
 - 100km, 10 anni => prezzo corretto: €16.80
 - 100km, 70 anni => prezzo corretto: €12.60
+
+### Bonus
+
+> - Chiediamo il nome, oltre agli altri dati. Se è artur, viaggia GRATIS sempre
+> - Se è tiziano, viaggia a 0.5 euro al km invece di 0.21
+
 */
 
 // ? Pseudo codice
+
+// - Chiedo il nome all'utente
+const userName = prompt("Inserisci il tuo Nome?");
+console.log("userName: ", userName);
 
 // - Chiedo all'utente il numero di chilometri che vuole percorrere (via prompt)
 // - Trasformo gli input dell'utente in valori numerici
@@ -45,18 +55,39 @@ if (isNaN(userKM) || isNaN(userAge)) {
 // ? Elaborazione
 
 // - Calcolo il prezzo del biglietto basandomi sul prezzo al km e i km inseriti dall'utente
-const baseKMPrice = 0.21;
-const ticketFullPrice = userKM * baseKMPrice;
+let baseKMPrice = 0.21;
+let ticketFullPrice = userKM * baseKMPrice;
 
 console.log("ticketPrice: ", ticketFullPrice);
 
 // ? Output
 
-let finalPrice;
-let alertMessage;
+let finalPrice = ticketFullPrice;
+let alertMessage = `Il prezzo del biglietto è di € ${finalPrice.toFixed(
+  2
+)} (Non sono stati applicati sconti)`;
+
+//- SE (L'utente si chiama Artur)
+if (userName == "artur") {
+  //  - L'utente viaggia GRATIS
+  finalPrice = 0;
+  alertMessage = `Ciao Artur, Il prezzo del biglietto è di € ${finalPrice.toFixed(
+    2
+  )} (Biglietto Gratis)`;
+}
+
+//- OPPURE (L'utente si chiama Tiziano)
+else if (userName == "tiziano") {
+  baseKMPrice = 0.5;
+  ticketFullPrice = userKM * baseKMPrice;
+  finalPrice = ticketFullPrice;
+  alertMessage = `Ciao Tiziano, Il prezzo del biglietto è di € ${finalPrice.toFixed(
+    2
+  )} (Aumento del prezzo al KM)`;
+}
 
 // - SE (L'utente è minorenne)
-if (userAge < 18) {
+else if (userAge < 18) {
   // L'utente ha uno sconto del 20%
   const twentyDiscount = (ticketFullPrice * 20) / 100;
   finalPrice = ticketFullPrice - twentyDiscount;
@@ -64,6 +95,7 @@ if (userAge < 18) {
     2
   )} (Sconto applicato 20% Under 18)`;
 }
+
 // - OPPURE (L'utente è Over 65)
 else if (userAge > 65) {
   //   - L'utente ha uno scontro del 40%
@@ -72,14 +104,6 @@ else if (userAge > 65) {
   alertMessage = `Il prezzo del biglietto è di € ${finalPrice.toFixed(
     2
   )} (Sconto applicato 40% Over 65)`;
-}
-// - ALTRIMENTI
-else {
-  //   - L'utente non avrà sconto e pagherà il prezzo pieno del biglietto
-  finalPrice = ticketFullPrice;
-  alertMessage = `Il prezzo del biglietto è di € ${finalPrice.toFixed(
-    2
-  )} (Non sono stati applicati sconti)`;
 }
 
 console.log("finalPrice: ", finalPrice.toFixed(2));
