@@ -29,7 +29,7 @@ Per controllare che la vostra logica sui prezzi funzioni correttamente, provate 
 
 // - Chiedo il nome all'utente
 const userName = prompt("Inserisci il tuo Nome?");
-console.log("userName: ", userName);
+console.log("userName: ", userName, typeof userName);
 
 // - Chiedo all'utente il numero di chilometri che vuole percorrere (via prompt)
 // - Trasformo gli input dell'utente in valori numerici
@@ -52,10 +52,21 @@ if (isNaN(userKM) || isNaN(userAge)) {
   throw new Error("L'utente non ha inserito valori numerici validi");
 }
 
+if (userName === "") {
+  alert("NON HAI INSERITO UN NOME VALIDO");
+  throw new Error("L'utente non ha inserito valori testuali validi");
+}
+
 // ? Elaborazione
 
 // - Calcolo il prezzo del biglietto basandomi sul prezzo al km e i km inseriti dall'utente
 let baseKMPrice = 0.21;
+
+if (userName === "tiziano") {
+  baseKMPrice = 0.5;
+  alert("Ciao Tiziano, Il tuo prezzo al KM è di € 0.5");
+}
+
 let ticketFullPrice = userKM * baseKMPrice;
 
 console.log("ticketPrice: ", ticketFullPrice);
@@ -68,22 +79,12 @@ let alertMessage = `Il prezzo del biglietto è di € ${finalPrice.toFixed(
 )} (Non sono stati applicati sconti)`;
 
 //- SE (L'utente si chiama Artur)
-if (userName == "artur") {
+if (userName === "artur") {
   //  - L'utente viaggia GRATIS
   finalPrice = 0;
   alertMessage = `Ciao Artur, Il prezzo del biglietto è di € ${finalPrice.toFixed(
     2
   )} (Biglietto Gratis)`;
-}
-
-//- OPPURE (L'utente si chiama Tiziano)
-else if (userName == "tiziano") {
-  baseKMPrice = 0.5;
-  ticketFullPrice = userKM * baseKMPrice;
-  finalPrice = ticketFullPrice;
-  alertMessage = `Ciao Tiziano, Il prezzo del biglietto è di € ${finalPrice.toFixed(
-    2
-  )} (Aumento del prezzo al KM)`;
 }
 
 // - SE (L'utente è minorenne)
@@ -106,5 +107,5 @@ else if (userAge > 65) {
   )} (Sconto applicato 40% Over 65)`;
 }
 
-console.log("finalPrice: ", finalPrice.toFixed(2));
+console.log("finalPrice: €", finalPrice.toFixed(2));
 alert(alertMessage);
