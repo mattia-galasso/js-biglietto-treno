@@ -35,6 +35,13 @@ const userAge = parseInt(
 );
 console.log("userAge: ", userAge);
 
+// ? Validazione
+// - Se valore scritto nei prompt risulta NaN compare un errore
+if (isNaN(userKM) || isNaN(userAge)) {
+  alert("NON HAI INSERITO VALORI NUMERICI VALIDI");
+  throw new Error("L'utente non ha inserito valori numerici validi");
+}
+
 // ? Elaborazione
 
 // - Calcolo il prezzo del biglietto basandomi sul prezzo al km e i km inseriti dall'utente
